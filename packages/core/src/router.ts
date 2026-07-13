@@ -2,8 +2,8 @@ import type { AgentDefinition } from "./agent.js";
 
 export interface RouteIntent {
   raw: string;
-  detectedIntent?: string;
-  confidence?: number;
+  detectedIntent?: string | undefined;
+  confidence?: number | undefined;
 }
 
 export interface ExecutionPlan {
