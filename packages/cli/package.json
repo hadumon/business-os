@@ -24,6 +24,7 @@
     "@business-os/artifact-core": "workspace:*",
     "@business-os/runtime": "workspace:*",
     "@business-os/agent-discover": "workspace:*",
+    "@business-os/agent-strategy": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 {
-  "name": "@business-os/agent-discover",
+  "name": "@business-os/agent-strategy",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -14,16 +14,15 @@
   "dependencies": {
     "@business-os/core": "workspace:*",
     "@business-os/sdk": "workspace:*",
-    "@business-os/workflow": "workspace:*",
     "@business-os/capability-core": "workspace:*",
     "@business-os/capabilities": "workspace:*"
   },
   "devDependencies": {
-    "typescript": "^5.9.0",
-    "vitest": "^3.2.0",
-    "@types/node": "^22.20.1",
-    "@business-os/memory": "workspace:*",
+    "@business-os/agent-discover": "workspace:*",
     "@business-os/artifacts": "workspace:*",
-    "@business-os/runtime": "workspace:*"
+    "@business-os/memory": "workspace:*",
+    "@business-os/runtime": "workspace:*",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
   }
 }

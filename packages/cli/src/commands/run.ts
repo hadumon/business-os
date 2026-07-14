@@ -1,10 +1,12 @@
 import { Command } from "commander";
 import { workspaceExists, buildRuntime } from "../workspace.js";
 import { discoverAgent } from "@business-os/agent-discover";
+import { strategyAgent } from "@business-os/agent-strategy";
 
 /** Central registry of agents the CLI knows how to run, keyed by id. */
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
+  strategy: strategyAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {

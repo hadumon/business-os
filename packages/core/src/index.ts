@@ -5,3 +5,4 @@ export * from "./memory.js";
 export * from "./artifact.js";
 export * from "./event.js";
 export * from "./plugin.js";
+export type * from "./logger.js";

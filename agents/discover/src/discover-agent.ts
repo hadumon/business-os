@@ -1,4 +1,5 @@
 import { defineAgent, z } from "@business-os/sdk";
+import type { CapabilityContext } from "@business-os/capability-core";
 import { buildDiscoverPipeline } from "./build-pipeline.js";
 import { renderDiscoverReport } from "./render-report.js";
 import type { DiscoverPipelineState } from "./types.js";
@@ -18,17 +19,16 @@ export const discoverOutputSchema = z.object({
 export const discoverAgent = defineAgent({
   id: "discover",
   description:
-    "Runs a full market discovery pipeline: market scan, problem discovery, competitor analysis, demand validation, opportunity scoring, business model proposal, risk analysis, and recommendation.",
+    "Runs a full market discovery pipeline composed of reusable capabilities: market research, competitor analysis, demand validation, opportunity scoring, pricing, and risk analysis.",
   inputSchema: discoverInputSchema,
   outputSchema: discoverOutputSchema,
   execute: async (ctx) => {
     const runId = `${Date.now()}`;
     const author = ctx.input.author ?? "agent:discover";
 
-    const pipeline = buildDiscoverPipeline(runId);
+    const capCtx: CapabilityContext = { memory: ctx.memory, logger: ctx.logger };
+    const pipeline = buildDiscoverPipeline(runId, capCtx);
 
-    // Forward every workflow event onto the agent's own event bus so callers
-    // can observe progress without knowing the pipeline is a Workflow at all.
     for (const type of [
       "workflow.started",
       "node.started",
@@ -63,7 +63,6 @@ export const discoverAgent = defineAgent({
 
     const result = lastNode.output as DiscoverPipelineState;
 
-    // Persist working notes to memory (not the final deliverable — that's the artifact).
     await ctx.memory.write(
       `discover/${ctx.input.project}/${runId}.md`,
       `# Discover run notes\n\nTopic: ${ctx.input.topic}\nRun: ${runId}\n\nRaw pipeline state:\n\n\`\`\`json\n${JSON.stringify(result, null, 2)}\n\`\`\`\n`,

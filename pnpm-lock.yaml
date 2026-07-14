@@ -44,6 +44,12 @@ importers:
 
   agents/discover:
     dependencies:
+      '@business-os/capabilities':
+        specifier: workspace:*
+        version: link:../../packages/capabilities
+      '@business-os/capability-core':
+        specifier: workspace:*
+        version: link:../../packages/capability-core
       '@business-os/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -72,6 +78,40 @@ importers:
       vitest:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@22.20.1)(yaml@2.9.0)
+
+  agents/strategy:
+    dependencies:
+      '@business-os/capabilities':
+        specifier: workspace:*
+        version: link:../../packages/capabilities
+      '@business-os/capability-core':
+        specifier: workspace:*
+        version: link:../../packages/capability-core
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@business-os/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
+    devDependencies:
+      '@business-os/agent-discover':
+        specifier: workspace:*
+        version: link:../discover
+      '@business-os/artifacts':
+        specifier: workspace:*
+        version: link:../../packages/artifacts
+      '@business-os/memory':
+        specifier: workspace:*
+        version: link:../../packages/memory
+      '@business-os/runtime':
+        specifier: workspace:*
+        version: link:../../packages/runtime
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
 
   packages/artifact-core:
     devDependencies:
@@ -136,11 +176,43 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
 
+  packages/capabilities:
+    dependencies:
+      '@business-os/capability-core':
+        specifier: workspace:*
+        version: link:../capability-core
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
+
+  packages/capability-core:
+    dependencies:
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
+
   packages/cli:
     dependencies:
       '@business-os/agent-discover':
         specifier: workspace:*
         version: link:../../agents/discover
+      '@business-os/agent-strategy':
+        specifier: workspace:*
+        version: link:../../agents/strategy
       '@business-os/artifact-core':
         specifier: workspace:*
         version: link:../artifact-core
