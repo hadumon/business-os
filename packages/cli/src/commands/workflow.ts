@@ -3,13 +3,21 @@ import { Command } from "commander";
 const WORKFLOW_SHAPES: Record<string, string[]> = {
   discover: [
     "market-scan",
-    "problem-discovery",
     "competitor-analysis",
     "demand-validation",
     "opportunity-score",
     "business-model",
     "risk-analysis",
     "recommendation",
+  ],
+  strategy: [
+    "market-research",
+    "competitor-analysis",
+    "demand-validation",
+    "opportunity-scoring",
+    "swot",
+    "pricing",
+    "artifact-creation",
   ],
 };
 

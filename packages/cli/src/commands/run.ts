@@ -15,7 +15,11 @@ export function registerRunCommand(program: Command): void {
     .description("Run a registered agent by id (e.g. `bos run discover`)")
     .requiredOption("-p, --project <name>", "project name")
     .requiredOption("-t, --topic <topic>", "topic to run the agent on")
-    .action(async (agentId: string, opts: { project: string; topic: string }) => {
+    .option(
+      "-f, --from <artifactId>",
+      "source artifact id to link (e.g. a Discover artifact id, for `bos run strategy --from <id>`)",
+    )
+    .action(async (agentId: string, opts: { project: string; topic: string; from?: string }) => {
       if (!workspaceExists()) {
         console.error("No .business workspace found. Run `bos init` first.");
         process.exitCode = 1;
@@ -36,7 +40,13 @@ export function registerRunCommand(program: Command): void {
 
       console.log(`Running "${agentId}" on topic "${opts.topic}"...\n`);
 
-      const result = await runtime.execute(agentId, { project: opts.project, topic: opts.topic });
+      const input = {
+        project: opts.project,
+        topic: opts.topic,
+        ...(opts.from ? { sourceArtifactId: opts.from } : {}),
+      };
+
+      const result = await runtime.execute(agentId, input);
 
       if (!result.success) {
         console.error(`Agent run failed: ${result.error}`);
