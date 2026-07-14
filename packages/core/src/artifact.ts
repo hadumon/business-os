@@ -55,13 +55,13 @@ export interface UpdateArtifactInput {
 }
 
 export interface ArtifactFilter {
-  project?: string;
-  type?: ArtifactType;
-  status?: ArtifactStatus;
-  tag?: string;
-  keyword?: string;
-  minVersion?: number;
-  createdAfter?: number;
+  project?: string | undefined;
+  type?: ArtifactType | undefined;
+  status?: ArtifactStatus | undefined;
+  tag?: string | undefined;
+  keyword?: string | undefined;
+  minVersion?: number | undefined;
+  createdAfter?: number | undefined;
 }
 
 export interface ArtifactManager {

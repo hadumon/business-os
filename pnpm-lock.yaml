@@ -136,6 +136,49 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
 
+  packages/cli:
+    dependencies:
+      '@business-os/agent-discover':
+        specifier: workspace:*
+        version: link:../../agents/discover
+      '@business-os/artifact-core':
+        specifier: workspace:*
+        version: link:../artifact-core
+      '@business-os/artifacts':
+        specifier: workspace:*
+        version: link:../artifacts
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../core
+      '@business-os/memory':
+        specifier: workspace:*
+        version: link:../memory
+      '@business-os/router':
+        specifier: workspace:*
+        version: link:../router
+      '@business-os/runtime':
+        specifier: workspace:*
+        version: link:../runtime
+      '@business-os/sdk':
+        specifier: workspace:*
+        version: link:../sdk
+      '@business-os/workflow':
+        specifier: workspace:*
+        version: link:../workflow
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.1
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@22.20.1)(yaml@2.9.0)
+
   packages/core:
     devDependencies:
       typescript:

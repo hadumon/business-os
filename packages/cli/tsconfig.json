@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": { "outDir": "dist", "rootDir": "src", "lib": ["ES2023"], "composite": true },
+  "include": ["src"],
+  "references": [
+    { "path": "../core" },
+    { "path": "../sdk" },
+    { "path": "../router" },
+    { "path": "../workflow" },
+    { "path": "../memory" },
+    { "path": "../artifacts" },
+    { "path": "../artifact-core" },
+    { "path": "../runtime" },
+    { "path": "../../agents/discover" }
+  ],
+  "typeAcquisition": {
+    "exclude": ["@types/node"]
+  }
+}

@@ -6,9 +6,9 @@ export interface MemoryDocument {
 }
 
 export interface MemoryQuery {
-  path?: string;
-  keyword?: string;
-  limit?: number;
+  path?: string | undefined;
+  keyword?: string | undefined;
+  limit?: number | undefined;
 }
 
 export interface Memory {
