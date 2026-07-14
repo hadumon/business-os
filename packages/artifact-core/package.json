@@ -1,5 +1,5 @@
 {
-  "name": "@business-os/router",
+  "name": "@business-os/artifact-core",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,10 +9,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --max-warnings 0",
-    "test": "vitest run"
-  },
-  "dependencies": {
-    "@business-os/core": "workspace:*"
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "typescript": "^5.7.0",
