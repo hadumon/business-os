@@ -12,7 +12,8 @@
     { "path": "../artifact-core" },
     { "path": "../runtime" },
     { "path": "../../agents/discover" },
-    { "path": "../../agents/strategy" }
+    { "path": "../../agents/strategy" },
+    { "path": "../../agents/product" }
   ],
   "typeAcquisition": {
     "exclude": ["@types/node"]

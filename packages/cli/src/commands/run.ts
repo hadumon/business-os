@@ -2,11 +2,12 @@ import { Command } from "commander";
 import { workspaceExists, buildRuntime } from "../workspace.js";
 import { discoverAgent } from "@business-os/agent-discover";
 import { strategyAgent } from "@business-os/agent-strategy";
+import { productAgent } from "@business-os/agent-product";
 
-/** Central registry of agents the CLI knows how to run, keyed by id. */
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
   strategy: strategyAgent,
+  product: productAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -14,12 +15,12 @@ export function registerRunCommand(program: Command): void {
     .command("run <agent>")
     .description("Run a registered agent by id (e.g. `bos run discover`)")
     .requiredOption("-p, --project <name>", "project name")
-    .requiredOption("-t, --topic <topic>", "topic to run the agent on")
+    .option("-t, --topic <topic>", "topic to run the agent on (required for discover, strategy)")
     .option(
       "-f, --from <artifactId>",
-      "source artifact id to link (e.g. a Discover artifact id, for `bos run strategy --from <id>`)",
+      "source artifact id to link/consume (Discover id for strategy; Strategy id for product)",
     )
-    .action(async (agentId: string, opts: { project: string; topic: string; from?: string }) => {
+    .action(async (agentId: string, opts: { project: string; topic?: string; from?: string }) => {
       if (!workspaceExists()) {
         console.error("No .business workspace found. Run `bos init` first.");
         process.exitCode = 1;
@@ -35,17 +36,31 @@ export function registerRunCommand(program: Command): void {
         return;
       }
 
+      let input: Record<string, unknown>;
+      if (agentId === "product") {
+        if (!opts.from) {
+          console.error("`bos run product` requires --from <strategyArtifactId>");
+          process.exitCode = 1;
+          return;
+        }
+        input = { project: opts.project, strategyArtifactId: opts.from };
+      } else {
+        if (!opts.topic) {
+          console.error(`\`bos run ${agentId}\` requires --topic <topic>`);
+          process.exitCode = 1;
+          return;
+        }
+        input = {
+          project: opts.project,
+          topic: opts.topic,
+          ...(opts.from ? { sourceArtifactId: opts.from } : {}),
+        };
+      }
+
       const { runtime } = buildRuntime();
       runtime.register(agent);
 
-      console.log(`Running "${agentId}" on topic "${opts.topic}"...\n`);
-
-      const input = {
-        project: opts.project,
-        topic: opts.topic,
-        ...(opts.from ? { sourceArtifactId: opts.from } : {}),
-      };
-
+      console.log(`Running "${agentId}"...\n`);
       const result = await runtime.execute(agentId, input);
 
       if (!result.success) {

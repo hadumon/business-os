@@ -25,6 +25,7 @@
     "@business-os/runtime": "workspace:*",
     "@business-os/agent-discover": "workspace:*",
     "@business-os/agent-strategy": "workspace:*",
+    "@business-os/agent-product": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {

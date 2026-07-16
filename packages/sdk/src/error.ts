@@ -8,7 +8,8 @@ export class AgentValidationError extends Error {
 
 export class AgentExecutionError extends Error {
   constructor(agentId: string, cause: unknown) {
-    super(`Execution failed for agent "${agentId}"`);
+    const causeMsg = cause instanceof Error ? cause.message : String(cause);
+    super(`Execution failed for agent "${agentId}": ${causeMsg}`);
     this.name = "AgentExecutionError";
     this.cause = cause;
   }

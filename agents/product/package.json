@@ -1,0 +1,33 @@
+{
+  "name": "@business-os/agent-product",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run"
+  },
+    "dependencies": {
+      "@business-os/core": "workspace:*",
+      "@business-os/sdk": "workspace:*",
+      "@business-os/artifact-core": "workspace:*",
+      "@business-os/memory": "workspace:*",
+      "@business-os/artifacts": "workspace:*",
+      "@business-os/runtime": "workspace:*",
+      "@business-os/agent-discover": "workspace:*",
+      "@business-os/agent-strategy": "workspace:*"
+    },
+    "devDependencies": {
+      "typescript": "^5.9.0",
+      "vitest": "^3.2.0",
+      "@business-os/memory": "workspace:*",
+      "@business-os/artifacts": "workspace:*",
+      "@business-os/runtime": "workspace:*",
+      "@business-os/agent-discover": "workspace:*",
+      "@business-os/agent-strategy": "workspace:*"
+    }
+}
