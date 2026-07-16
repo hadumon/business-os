@@ -118,3 +118,5 @@ Implementations of these interfaces (e.g. `FileMemory`, `SqliteArtifactManager`,
 - [`memory.md`](./memory.md) — the Markdown + SQLite hybrid store
 - [`artifacts.md`](./artifacts.md) — immutable, versioned outputs
 - [`router.md`](./router.md) — intent detection and execution planning
+- [`capabilities.md`](./capabilities.md) — reusable business logic shared across agents
+- [`cli.md`](./cli.md) — the `bos` command-line interface
