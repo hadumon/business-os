@@ -1,9 +1,10 @@
 import { Command } from "commander";
 import { workspaceExists, buildRuntime } from "../workspace.js";
+import { GraphBuilder, renderAscii, renderMermaid, renderJson } from "@business-os/artifact-graph";
 import type { ArtifactType } from "@business-os/artifact-core";
 
 export function registerArtifactsCommand(program: Command): void {
-  program
+  const artifactsCmd = program
     .command("artifacts")
     .description("List artifacts in the current workspace")
     .option("-p, --project <name>", "filter by project")
@@ -41,6 +42,48 @@ export function registerArtifactsCommand(program: Command): void {
           }
         }
         console.log("");
+      }
+    });
+
+  artifactsCmd
+    .command("graph")
+    .description("Visualize artifact relationships as a tree, Mermaid diagram, or JSON")
+    .option("-p, --project <name>", "scope the graph to a project")
+    .option("-a, --artifact <id>", "center the graph on a single artifact")
+    .option("-d, --depth <n>", "limit traversal depth when using --artifact", parseInt)
+    .option("--format <format>", "output format: ascii (default), mermaid, json", "ascii")
+    .option("--labels", "show relationship labels in ascii output")
+    .action(async (opts: { project?: string; artifact?: string; depth?: number; format: string; labels?: boolean }) => {
+      if (!workspaceExists()) {
+        console.error("No .business workspace found. Run `bos init` first.");
+        process.exitCode = 1;
+        return;
+      }
+
+      const { artifacts } = buildRuntime();
+      const builder = new GraphBuilder(artifacts);
+
+      const graph = opts.artifact
+        ? await builder.buildFromArtifact(opts.artifact, opts.depth)
+        : await builder.build({ project: opts.project });
+
+      if (graph.nodes.length === 0) {
+        console.log("No artifacts found to graph.");
+        return;
+      }
+
+      switch (opts.format) {
+        case "mermaid":
+          console.log(renderMermaid(graph));
+          break;
+        case "json":
+          console.log(renderJson(graph));
+          break;
+        case "ascii":
+        default:
+          if (opts.project) console.log(`Project: ${opts.project}\n`);
+          console.log(renderAscii(graph, { ...(opts.labels !== undefined ? { showRelationLabels: opts.labels } : {}) }));
+          break;
       }
     });
 }

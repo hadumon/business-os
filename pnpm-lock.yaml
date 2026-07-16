@@ -178,6 +178,22 @@ importers:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
 
+  packages/artifact-graph:
+    dependencies:
+      '@business-os/artifact-core':
+        specifier: workspace:*
+        version: link:../artifact-core
+    devDependencies:
+      '@business-os/artifacts':
+        specifier: workspace:*
+        version: link:../artifacts
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
+
   packages/artifact-sqlite:
     dependencies:
       '@business-os/artifact-core':
@@ -259,6 +275,9 @@ importers:
       '@business-os/artifact-core':
         specifier: workspace:*
         version: link:../artifact-core
+      '@business-os/artifact-graph':
+        specifier: workspace:*
+        version: link:../artifact-graph
       '@business-os/artifacts':
         specifier: workspace:*
         version: link:../artifacts

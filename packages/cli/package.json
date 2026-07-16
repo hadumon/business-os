@@ -22,6 +22,7 @@
     "@business-os/memory": "workspace:*",
     "@business-os/artifacts": "workspace:*",
     "@business-os/artifact-core": "workspace:*",
+    "@business-os/artifact-graph": "workspace:*",
     "@business-os/runtime": "workspace:*",
     "@business-os/agent-discover": "workspace:*",
     "@business-os/agent-strategy": "workspace:*",

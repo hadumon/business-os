@@ -10,6 +10,7 @@
     { "path": "../memory" },
     { "path": "../artifacts" },
     { "path": "../artifact-core" },
+    { "path": "../artifact-graph" },
     { "path": "../runtime" },
     { "path": "../../agents/discover" },
     { "path": "../../agents/strategy" },
