@@ -1,4 +1,5 @@
 import { defineAgent, z } from "@business-os/sdk";
+import { BUSINESS_OS_VERSION } from "@business-os/artifact-core";
 import type { CapabilityContext } from "@business-os/capability-core";
 import {
   marketResearchCapability,
@@ -101,6 +102,22 @@ export const strategyAgent = defineAgent({
       author,
       tags: ["strategy", ctx.input.topic],
       status: "draft",
+      provenance: {
+        generatedBy: {
+          agentId: "strategy",
+          capabilityIds: [
+            "market-research",
+            "competitor-analysis",
+            "demand-validation",
+            "opportunity-scoring",
+            "swot",
+            "pricing",
+          ],
+        },
+        inputArtifactIds: ctx.input.sourceArtifactId ? [ctx.input.sourceArtifactId] : [],
+        frameworkVersion: BUSINESS_OS_VERSION,
+        createdAt: Date.now(),
+      },
     });
 
     if (ctx.input.sourceArtifactId) {

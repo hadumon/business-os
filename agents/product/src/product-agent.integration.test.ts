@@ -84,6 +84,21 @@ describe("productAgent — full integration", () => {
     expect(generatedRel!.targetArtifactId).toBe(productOutput.artifactId);
   });
 
+  it("records provenance linking the PRD back to its source strategy artifact", async () => {
+    const strategyResult = await runtime.execute("strategy", { project: "acme", topic: "provenance test" });
+    const strategyOutput = strategyResult.output as { artifactId: string };
+
+    const productResult = await runtime.execute("product", {
+      project: "acme",
+      strategyArtifactId: strategyOutput.artifactId,
+    });
+    const productOutput = productResult.output as { artifactId: string };
+
+    const prd = await artifacts.get(productOutput.artifactId);
+    expect(prd!.metadata.provenance?.generatedBy.agentId).toBe("product");
+    expect(prd!.metadata.provenance?.inputArtifactIds).toEqual([strategyOutput.artifactId]);
+  });
+
   it("rejects a strategyArtifactId that doesn't exist", async () => {
     const result = await runtime.execute("product", {
       project: "acme",

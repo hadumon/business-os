@@ -189,6 +189,57 @@ describe("SqliteArtifactManager", () => {
     expect(result).toBeNull();
   });
 
+  it("persists provenance metadata on create", async () => {
+    const artifact = await manager.create({
+      project: "demo",
+      type: "prd",
+      title: "PRD",
+      content: "x",
+      author: "a",
+      provenance: {
+        generatedBy: { agentId: "product", capabilityIds: [] },
+        inputArtifactIds: ["strategy-abc123"],
+        frameworkVersion: "0.3.2-alpha",
+        createdAt: Date.now(),
+      },
+    });
+
+    const fetched = await manager.get(artifact.metadata.id);
+    expect(fetched!.metadata.provenance?.generatedBy.agentId).toBe("product");
+    expect(fetched!.metadata.provenance?.inputArtifactIds).toEqual(["strategy-abc123"]);
+  });
+
+  it("carries forward provenance on update when not explicitly overridden", async () => {
+    const created = await manager.create({
+      project: "demo",
+      type: "prd",
+      title: "PRD",
+      content: "v1",
+      author: "a",
+      provenance: {
+        generatedBy: { agentId: "product" },
+        inputArtifactIds: ["strategy-x"],
+        frameworkVersion: "0.3.2-alpha",
+        createdAt: Date.now(),
+      },
+    });
+
+    const updated = await manager.update(created.metadata.id, { content: "v2", author: "a" });
+    expect(updated.metadata.provenance?.generatedBy.agentId).toBe("product");
+  });
+
+  it("has no provenance for artifacts created without it (backward compatible)", async () => {
+    const artifact = await manager.create({
+      project: "demo",
+      type: "report",
+      title: "Legacy",
+      content: "x",
+      author: "a",
+    });
+    const fetched = await manager.get(artifact.metadata.id);
+    expect(fetched!.metadata.provenance).toBeUndefined();
+  });
+
   it("generates unique ids for concurrent artifact creation", async () => {
     const results = await Promise.all(
       Array.from({ length: 20 }, (_, i) =>

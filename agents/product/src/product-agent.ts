@@ -1,4 +1,5 @@
 import { defineAgent, z } from "@business-os/sdk";
+import { BUSINESS_OS_VERSION } from "@business-os/artifact-core";
 
 export const productInputSchema = z.object({
   project: z.string().min(1),
@@ -93,6 +94,14 @@ export const productAgent = defineAgent({
       author,
       tags: ["prd", topic],
       status: "draft",
+      provenance: {
+        generatedBy: {
+          agentId: "product",
+        },
+        inputArtifactIds: [strategyArtifact.metadata.id],
+        frameworkVersion: BUSINESS_OS_VERSION,
+        createdAt: Date.now(),
+      },
     });
 
     await ctx.artifacts.linkRelationship(

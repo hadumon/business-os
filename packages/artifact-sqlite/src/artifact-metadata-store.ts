@@ -20,6 +20,7 @@ interface MetadataRow {
   author: string;
   tags: string;
   path: string;
+  provenance: string | null;
 }
 
 function rowToMetadata(row: MetadataRow): ArtifactMetadata {
@@ -28,6 +29,7 @@ function rowToMetadata(row: MetadataRow): ArtifactMetadata {
     type: row.type as ArtifactMetadata["type"],
     status: row.status as ArtifactMetadata["status"],
     tags: JSON.parse(row.tags) as string[],
+    provenance: row.provenance ? JSON.parse(row.provenance) : undefined,
   };
 }
 
@@ -51,6 +53,7 @@ export class ArtifactMetadataStore {
         author TEXT NOT NULL,
         tags TEXT NOT NULL,
         path TEXT NOT NULL,
+        provenance TEXT,
         PRIMARY KEY (id, version)
       );
       CREATE INDEX IF NOT EXISTS idx_artifact_project ON artifact_versions(project);
@@ -67,13 +70,19 @@ export class ArtifactMetadataStore {
       CREATE INDEX IF NOT EXISTS idx_rel_source ON artifact_relationships(sourceArtifactId);
       CREATE INDEX IF NOT EXISTS idx_rel_target ON artifact_relationships(targetArtifactId);
     `);
+
+    try {
+      this.db.exec(`ALTER TABLE artifact_versions ADD COLUMN provenance TEXT;`);
+    } catch {
+      // Column already exists
+    }
   }
 
   insertVersion(meta: ArtifactMetadata): void {
     const stmt = this.db.prepare(`
       INSERT INTO artifact_versions
-        (id, project, type, title, createdAt, updatedAt, version, parentVersion, status, author, tags, path)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        (id, project, type, title, createdAt, updatedAt, version, parentVersion, status, author, tags, path, provenance)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     `);
     stmt.run(
       meta.id,
@@ -88,6 +97,7 @@ export class ArtifactMetadataStore {
       meta.author,
       JSON.stringify(meta.tags),
       meta.path,
+      meta.provenance ? JSON.stringify(meta.provenance) : null
     );
   }
 

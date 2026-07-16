@@ -1,4 +1,5 @@
 import { defineAgent, z } from "@business-os/sdk";
+import { BUSINESS_OS_VERSION } from "@business-os/artifact-core";
 import type { CapabilityContext } from "@business-os/capability-core";
 import { buildDiscoverPipeline } from "./build-pipeline.js";
 import { renderDiscoverReport } from "./render-report.js";
@@ -76,6 +77,23 @@ export const discoverAgent = defineAgent({
       author,
       tags: ["discover", ctx.input.topic],
       status: "draft",
+      provenance: {
+        generatedBy: {
+          agentId: "discover",
+          capabilityIds: [
+            "market-research",
+            "competitor-analysis",
+            "demand-validation",
+            "opportunity-scoring",
+            "pricing",
+            "risk-analysis",
+          ],
+          workflowId: pipeline.id,
+        },
+        inputArtifactIds: [],
+        frameworkVersion: BUSINESS_OS_VERSION,
+        createdAt: Date.now(),
+      },
     });
 
     ctx.logger.info("Discover pipeline complete", {

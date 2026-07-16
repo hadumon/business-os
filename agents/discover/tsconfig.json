@@ -4,6 +4,7 @@
   "include": ["src"],
   "references": [
     { "path": "../../packages/core" },
+    { "path": "../../packages/artifact-core" },
     { "path": "../../packages/sdk" },
     { "path": "../../packages/workflow" },
     { "path": "../../packages/memory" },

@@ -3,6 +3,17 @@ export type ArtifactType =
 
 export type ArtifactStatus = "draft" | "review" | "approved" | "archived";
 
+export interface ArtifactProvenance {
+  generatedBy: {
+    agentId: string;
+    capabilityIds?: string[];
+    workflowId?: string;
+  };
+  inputArtifactIds: string[];
+  frameworkVersion: string;
+  createdAt: number;
+}
+
 export interface ArtifactMetadata {
   id: string;
   project: string;
@@ -16,6 +27,8 @@ export interface ArtifactMetadata {
   author: string;
   tags: string[];
   path: string;
+  /** Optional: full generation lineage. Absent for artifacts created before provenance was introduced. */
+  provenance?: ArtifactProvenance;
 }
 
 export interface ArtifactRelationship {
@@ -39,12 +52,14 @@ export interface CreateArtifactInput {
   author: string;
   tags?: string[];
   status?: ArtifactStatus;
+  provenance?: ArtifactProvenance;
 }
 
 export interface UpdateArtifactInput {
   content: string;
   author: string;
   status?: ArtifactStatus;
+  provenance?: ArtifactProvenance;
 }
 
 export interface ArtifactFilter {

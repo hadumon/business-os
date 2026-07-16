@@ -46,6 +46,7 @@ export class SqliteArtifactManager implements ArtifactManager {
       author: input.author,
       tags: input.tags ?? [],
       path,
+      ...(input.provenance ? { provenance: input.provenance } : {}),
     };
 
     this.meta.insertVersion(metadata);
@@ -62,6 +63,7 @@ export class SqliteArtifactManager implements ArtifactManager {
     const now = Date.now();
     const path = await this.files.writeVersion(current.type, id, nextVersion, input.content);
 
+    const resolvedProvenance = input.provenance ?? current.provenance;
     const metadata: ArtifactMetadata = {
       ...current,
       updatedAt: now,
@@ -70,6 +72,7 @@ export class SqliteArtifactManager implements ArtifactManager {
       status: input.status ?? current.status,
       author: input.author,
       path,
+      ...(resolvedProvenance ? { provenance: resolvedProvenance } : {}),
     };
 
     this.meta.insertVersion(metadata);

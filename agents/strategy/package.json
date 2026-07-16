@@ -14,6 +14,7 @@
   "dependencies": {
     "@business-os/core": "workspace:*",
     "@business-os/sdk": "workspace:*",
+    "@business-os/artifact-core": "workspace:*",
     "@business-os/capability-core": "workspace:*",
     "@business-os/capabilities": "workspace:*"
   },

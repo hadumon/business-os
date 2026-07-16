@@ -44,6 +44,9 @@ importers:
 
   agents/discover:
     dependencies:
+      '@business-os/artifact-core':
+        specifier: workspace:*
+        version: link:../../packages/artifact-core
       '@business-os/capabilities':
         specifier: workspace:*
         version: link:../../packages/capabilities
@@ -115,6 +118,9 @@ importers:
 
   agents/strategy:
     dependencies:
+      '@business-os/artifact-core':
+        specifier: workspace:*
+        version: link:../../packages/artifact-core
       '@business-os/capabilities':
         specifier: workspace:*
         version: link:../../packages/capabilities
