@@ -19,6 +19,13 @@ const WORKFLOW_SHAPES: Record<string, string[]> = {
     "pricing",
     "artifact-creation",
   ],
+  product: [
+    "read-strategy-artifact",
+    "extract-problem-statement",
+    "derive-requirements",
+    "render-prd",
+    "link-relationship",
+  ],
 };
 
 export function registerWorkflowCommand(program: Command): void {

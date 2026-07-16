@@ -50,7 +50,7 @@ export function buildRuntime(cwd = process.cwd()): {
   artifacts: SqliteArtifactManager;
 } {
   const root = resolveWorkspaceRoot(cwd);
-  const memory = new FileMemory({ rootDir: root });
+  const memory = new FileMemory({ rootDir: join(root, "memory") });
   const artifacts = new SqliteArtifactManager({ rootDir: root });
   const runtime = new Runtime({ dependencies: { memory, artifacts } });
   return { runtime, memory, artifacts };

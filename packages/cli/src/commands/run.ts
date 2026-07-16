@@ -18,7 +18,7 @@ export function registerRunCommand(program: Command): void {
     .option("-t, --topic <topic>", "topic to run the agent on (required for discover, strategy)")
     .option(
       "-f, --from <artifactId>",
-      "source artifact id to link/consume (Discover id for strategy; Strategy id for product)",
+      "source artifact id to link/consume (Discover id for strategy; Strategy id for product). Use 'latest' to auto-resolve the most recently updated artifact.",
     )
     .action(async (agentId: string, opts: { project: string; topic?: string; from?: string }) => {
       if (!workspaceExists()) {
@@ -34,6 +34,28 @@ export function registerRunCommand(program: Command): void {
         );
         process.exitCode = 1;
         return;
+      }
+
+      const { runtime, artifacts } = buildRuntime();
+
+      // Resolve --from latest / validate --from exists BEFORE any agent-specific
+      // input is built, so downstream branches always see a real artifact id.
+      if (opts.from === "latest") {
+        const list = await artifacts.list({ project: opts.project });
+        if (list.length === 0) {
+          console.error("No artifacts found to use as --from latest. Run a prior agent first.");
+          process.exitCode = 1;
+          return;
+        }
+        opts.from = list[0]!.id;
+        console.log(`Resolved --from latest to ${opts.from}\n`);
+      } else if (opts.from) {
+        const exists = await artifacts.get(opts.from);
+        if (!exists) {
+          console.error(`Artifact "${opts.from}" not found. Run \`bos artifacts\` to see available ids.`);
+          process.exitCode = 1;
+          return;
+        }
       }
 
       let input: Record<string, unknown>;
@@ -57,7 +79,6 @@ export function registerRunCommand(program: Command): void {
         };
       }
 
-      const { runtime } = buildRuntime();
       runtime.register(agent);
 
       console.log(`Running "${agentId}"...\n`);

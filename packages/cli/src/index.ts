@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+process.on("warning", (warning) => {
+  if (warning.name === "ExperimentalWarning" && warning.message.includes("SQLite")) return;
+  console.warn(warning);
+});
+
 import { Command } from "commander";
 import { registerInitCommand } from "./commands/init.js";
 import { registerDoctorCommand } from "./commands/doctor.js";

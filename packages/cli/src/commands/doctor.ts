@@ -36,10 +36,11 @@ export function registerDoctorCommand(program: Command): void {
         });
         checks.push({ label: "memory/ directory exists", ok: existsSync(join(root, "memory")) });
         checks.push({ label: "state/ directory exists", ok: existsSync(join(root, "state")) });
+        const dbExists = existsSync(join(root, "state", "artifacts.sqlite"));
         checks.push({
           label: "artifacts SQLite database exists",
-          ok: existsSync(join(root, "state", "artifacts.sqlite")),
-          detail: "created on first artifact write, not on init",
+          ok: true,
+          ...(!dbExists ? { detail: "not yet created (this is normal — it's created on first `bos run`)" } : {}),
         });
       }
 
