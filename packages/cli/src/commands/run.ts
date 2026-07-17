@@ -3,11 +3,13 @@ import { workspaceExists, buildRuntime } from "../workspace.js";
 import { discoverAgent } from "@business-os/agent-discover";
 import { strategyAgent } from "@business-os/agent-strategy";
 import { productAgent } from "@business-os/agent-product";
+import { salesAgent } from "@dasna/agent-sales";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
   strategy: strategyAgent,
   product: productAgent,
+  sales: salesAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -18,9 +20,24 @@ export function registerRunCommand(program: Command): void {
     .option("-t, --topic <topic>", "topic to run the agent on (required for discover, strategy)")
     .option(
       "-f, --from <artifactId>",
-      "source artifact id to link/consume (Discover id for strategy; Strategy id for product). Use 'latest' to auto-resolve the most recently updated artifact.",
+      "source artifact id to link/consume (Discover id for strategy; Strategy id for product). Use 'latest' to auto-resolve.",
     )
-    .action(async (agentId: string, opts: { project: string; topic?: string; from?: string }) => {
+    .option("--need <text>", "customer need description (sales agent)")
+    .option("--budget <amount>", "customer budget (sales agent)", parseFloat)
+    .option("--size <size>", "preferred size, e.g. queen, king (sales agent)")
+    .option("--customer <name>", "customer name (sales agent)")
+    .action(async (
+      agentId: string,
+      opts: {
+        project: string;
+        topic?: string;
+        from?: string;
+        need?: string;
+        budget?: number;
+        size?: string;
+        customer?: string;
+      },
+    ) => {
       if (!workspaceExists()) {
         console.error("No .business workspace found. Run `bos init` first.");
         process.exitCode = 1;
@@ -66,6 +83,19 @@ export function registerRunCommand(program: Command): void {
           return;
         }
         input = { project: opts.project, strategyArtifactId: opts.from };
+      } else if (agentId === "sales") {
+        if (!opts.need || opts.budget === undefined) {
+          console.error("`bos run sales` requires --need <text> and --budget <amount>");
+          process.exitCode = 1;
+          return;
+        }
+        input = {
+          project: opts.project,
+          need: opts.need,
+          budget: opts.budget,
+          ...(opts.size ? { size: opts.size } : {}),
+          ...(opts.customer ? { customerName: opts.customer } : {}),
+        };
       } else {
         if (!opts.topic) {
           console.error(`\`bos run ${agentId}\` requires --topic <topic>`);

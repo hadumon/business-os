@@ -26,6 +26,13 @@ const WORKFLOW_SHAPES: Record<string, string[]> = {
     "render-prd",
     "link-relationship",
   ],
+  sales: [
+    "load-catalog",
+    "match-products",
+    "suggest-upsells",
+    "render-quote",
+    "create-artifact",
+  ],
 };
 
 export function registerWorkflowCommand(program: Command): void {

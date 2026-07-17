@@ -1,0 +1,81 @@
+[
+    {
+        "id": "mat-memory-queen",
+        "name": "Dasna ComfortFoam Memory Mattress - Queen",
+        "type": "memory-foam",
+        "size": "queen",
+        "price": 28000,
+        "firmness": "medium",
+        "goodFor": [
+            "back-pain",
+            "side-sleeper",
+            "couples"
+        ],
+        "warrantyYears": 5
+    },
+    {
+        "id": "mat-orthopedic-queen",
+        "name": "Dasna OrthoSupport Mattress - Queen",
+        "type": "orthopedic",
+        "size": "queen",
+        "price": 32000,
+        "firmness": "firm",
+        "goodFor": [
+            "back-pain",
+            "heavy-build"
+        ],
+        "warrantyYears": 7
+    },
+    {
+        "id": "mat-spring-single",
+        "name": "Dasna ClassicSpring Mattress - Single",
+        "type": "spring",
+        "size": "single",
+        "price": 15000,
+        "firmness": "medium-firm",
+        "goodFor": [
+            "kids",
+            "guest-room"
+        ],
+        "warrantyYears": 3
+    },
+    {
+        "id": "mat-hybrid-king",
+        "name": "Dasna HybridPlus Mattress - King",
+        "type": "hybrid",
+        "size": "king",
+        "price": 45000,
+        "firmness": "medium-soft",
+        "goodFor": [
+            "couples",
+            "back-pain",
+            "hot-sleeper"
+        ],
+        "warrantyYears": 7
+    },
+    {
+        "id": "acc-pillow-memory",
+        "name": "Dasna Memory Foam Pillow",
+        "type": "accessory",
+        "size": "standard",
+        "price": 2500,
+        "firmness": "soft",
+        "goodFor": [
+            "neck-pain"
+        ],
+        "warrantyYears": 1
+    },
+    {
+        "id": "acc-mattress-protector-queen",
+        "name": "Dasna Waterproof Mattress Protector - Queen",
+        "type": "accessory",
+        "size": "queen",
+        "price": 1800,
+        "firmness": null,
+        "goodFor": [
+            "hygiene",
+            "allergy"
+        ],
+        "warrantyYears": 1
+    }
+]

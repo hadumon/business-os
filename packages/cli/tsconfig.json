@@ -14,7 +14,8 @@
     { "path": "../runtime" },
     { "path": "../../agents/discover" },
     { "path": "../../agents/strategy" },
-    { "path": "../../agents/product" }
+    { "path": "../../agents/product" },
+    { "path": "../../packs/dasna/sales" }
   ],
   "typeAcquisition": {
     "exclude": ["@types/node"]
