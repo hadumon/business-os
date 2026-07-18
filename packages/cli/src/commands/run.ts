@@ -5,6 +5,7 @@ import { strategyAgent } from "@business-os/agent-strategy";
 import { productAgent } from "@business-os/agent-product";
 import { salesAgent } from "@dasna/agent-sales";
 import { catalogAgent } from "@dasna/agent-catalog";
+import { marketingAgent } from "@dasna/agent-marketing";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
@@ -12,6 +13,7 @@ const AVAILABLE_AGENTS = {
   product: productAgent,
   sales: salesAgent,
   catalog: catalogAgent,
+  marketing: marketingAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -29,6 +31,7 @@ export function registerRunCommand(program: Command): void {
     .option("--size <size>", "preferred size, e.g. queen, king (sales agent)")
     .option("--customer <name>", "customer name (sales agent)")
     .option("--sku <productId>", "specific product id (catalog agent; omit to process entire catalog)")
+    .option("--campaign <name>", "campaign preset, e.g. dashain, tihar, new-year (marketing agent)")
     .action(async (
       agentId: string,
       opts: {
@@ -40,6 +43,7 @@ export function registerRunCommand(program: Command): void {
         size?: string;
         customer?: string;
         sku?: string;
+        campaign?: string;
       },
     ) => {
       if (!workspaceExists()) {
@@ -105,6 +109,13 @@ export function registerRunCommand(program: Command): void {
           project: opts.project,
           ...(opts.sku ? { productId: opts.sku } : {}),
         };
+      } else if (agentId === "marketing") {
+        if (!opts.campaign) {
+          console.error("`bos run marketing` requires --campaign <name>");
+          process.exitCode = 1;
+          return;
+        }
+        input = { project: opts.project, campaign: opts.campaign };
       } else {
         if (!opts.topic) {
           console.error(`\`bos run ${agentId}\` requires --topic <topic>`);

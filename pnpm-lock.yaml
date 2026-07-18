@@ -302,6 +302,9 @@ importers:
       '@dasna/agent-catalog':
         specifier: workspace:*
         version: link:../../packs/dasna/catalog-agent
+      '@dasna/agent-marketing':
+        specifier: workspace:*
+        version: link:../../packs/dasna/marketing
       '@dasna/agent-sales':
         specifier: workspace:*
         version: link:../../packs/dasna/sales
@@ -456,6 +459,37 @@ importers:
       vitest:
         specifier: ^3.2.0
         version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
+
+  packs/dasna/marketing:
+    dependencies:
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../../../packages/core
+      '@business-os/sdk':
+        specifier: workspace:*
+        version: link:../../../packages/sdk
+      '@dasna/catalog':
+        specifier: workspace:*
+        version: link:../catalog
+    devDependencies:
+      '@business-os/artifacts':
+        specifier: workspace:*
+        version: link:../../../packages/artifacts
+      '@business-os/memory':
+        specifier: workspace:*
+        version: link:../../../packages/memory
+      '@business-os/runtime':
+        specifier: workspace:*
+        version: link:../../../packages/runtime
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@22.20.1)(yaml@2.9.0)
 
   packs/dasna/sales:
     dependencies:

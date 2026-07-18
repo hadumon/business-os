@@ -1,4 +1,5 @@
 import type { Product } from "@dasna/catalog";
+import { humanizeUseCaseList } from "@dasna/catalog";
 
 export interface ProductCopy {
     description: string;
@@ -15,14 +16,14 @@ function titleCaseWords(s: string): string {
 }
 
 export function generateCopy(product: Product): ProductCopy {
-    const useCases = product.goodFor.map((tag) => titleCaseWords(tag)).join(", ");
+    const useCasesPhrase = humanizeUseCaseList(product.goodFor);
     const firmnessPhrase = product.firmness ? `${product.firmness} firmness` : "a range of comfort options";
 
     const description = [
         `The ${product.name} is a ${titleCaseWords(product.type)} mattress`,
         product.size ? ` in ${product.size} size` : "",
         `, offering ${firmnessPhrase}.`,
-        product.goodFor.length > 0 ? ` Ideal for ${useCases.toLowerCase()}.` : "",
+        product.goodFor.length > 0 ? ` Ideal for ${useCasesPhrase}.` : "",
         ` Backed by a ${product.warrantyYears || "limited"}-year warranty, it's built for lasting comfort and support.`,
     ].join("");
 
@@ -44,7 +45,7 @@ export function generateCopy(product: Product): ProductCopy {
     const seo = {
         metaTitle: `${product.name} | Dasna Ghar`,
         metaDescription: `${product.name} - ${titleCaseWords(product.type)} mattress${product.size ? `, ${product.size} size` : ""
-            }. ${product.goodFor.length > 0 ? `Great for ${useCases.toLowerCase()}. ` : ""}Shop now at Dasna Ghar.`.slice(0, 160),
+            }. ${product.goodFor.length > 0 ? `Great for ${useCasesPhrase}. ` : ""}Shop now at Dasna Ghar.`.slice(0, 160),
         keywords: [...new Set(keywords)],
     };
 

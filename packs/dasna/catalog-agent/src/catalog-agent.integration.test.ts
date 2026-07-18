@@ -7,7 +7,7 @@ import { SqliteArtifactManager } from "@business-os/artifacts";
 import { Runtime } from "@business-os/runtime";
 import { catalogAgent } from "./catalog-agent.js";
 
-describe("catalogAgent — integration", () => {
+describe("catalogAgent - integration", () => {
     let rootDir: string;
     let runtime: Runtime;
     let artifacts: SqliteArtifactManager;

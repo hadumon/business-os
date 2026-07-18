@@ -15,13 +15,13 @@ export function auditProduct(product: Product): DataGap[] {
         gaps.push({ field: "firmness", issue: "missing (expected for non-accessory products)" });
     }
     if (product.goodFor.length === 0) {
-        gaps.push({ field: "goodFor", issue: "no use-case tags — hurts search matching and SEO" });
+        gaps.push({ field: "goodFor", issue: "no use-case tags - hurts search matching and SEO" });
     }
     if (!product.price || product.price <= 0) {
         gaps.push({ field: "price", issue: "missing or invalid" });
     }
     if (!product.warrantyYears || product.warrantyYears <= 0) {
-        gaps.push({ field: "warrantyYears", issue: "missing or zero — customers ask about this often" });
+        gaps.push({ field: "warrantyYears", issue: "missing or zero - customers ask about this often" });
     }
     if (!product.size) {
         gaps.push({ field: "size", issue: "missing" });

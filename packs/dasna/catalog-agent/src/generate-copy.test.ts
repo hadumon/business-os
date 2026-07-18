@@ -24,4 +24,9 @@ describe("generateCopy", () => {
         expect(copy.seo.keywords).toContain("queen");
         expect(copy.seo.keywords.some((k) => k.includes("back pain"))).toBe(true);
     });
+
+    it("phrases use-cases as natural language, not a raw tag list", () => {
+        const copy = generateCopy(product);
+        expect(copy.description).toContain("Ideal for people with back pain and side sleepers");
+    });
 });
