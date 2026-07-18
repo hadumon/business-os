@@ -299,6 +299,9 @@ importers:
       '@business-os/workflow':
         specifier: workspace:*
         version: link:../workflow
+      '@dasna/agent-catalog':
+        specifier: workspace:*
+        version: link:../../packs/dasna/catalog-agent
       '@dasna/agent-sales':
         specifier: workspace:*
         version: link:../../packs/dasna/sales
@@ -419,6 +422,34 @@ importers:
 
   packs/dasna/catalog:
     devDependencies:
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.0
+        version: 3.2.7(@types/node@26.1.1)(yaml@2.9.0)
+
+  packs/dasna/catalog-agent:
+    dependencies:
+      '@business-os/core':
+        specifier: workspace:*
+        version: link:../../../packages/core
+      '@business-os/sdk':
+        specifier: workspace:*
+        version: link:../../../packages/sdk
+      '@dasna/catalog':
+        specifier: workspace:*
+        version: link:../catalog
+    devDependencies:
+      '@business-os/artifacts':
+        specifier: workspace:*
+        version: link:../../../packages/artifacts
+      '@business-os/memory':
+        specifier: workspace:*
+        version: link:../../../packages/memory
+      '@business-os/runtime':
+        specifier: workspace:*
+        version: link:../../../packages/runtime
       typescript:
         specifier: ^5.9.0
         version: 5.9.3
@@ -2476,14 +2507,6 @@ snapshots:
     optionalDependencies:
       vite: 6.4.3(@types/node@22.20.1)(yaml@2.9.0)
 
-  '@vitest/mocker@3.2.7(vite@6.4.3(@types/node@26.1.1)(yaml@2.9.0))':
-    dependencies:
-      '@vitest/spy': 3.2.7
-      estree-walker: 3.0.3
-      magic-string: 0.30.21
-    optionalDependencies:
-      vite: 6.4.3(@types/node@26.1.1)(yaml@2.9.0)
-
   '@vitest/pretty-format@3.2.7':
     dependencies:
       tinyrainbow: 2.0.0
@@ -3636,7 +3659,7 @@ snapshots:
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.7
-      '@vitest/mocker': 3.2.7(vite@6.4.3(@types/node@26.1.1)(yaml@2.9.0))
+      '@vitest/mocker': 3.2.7(vite@6.4.3(@types/node@22.20.1)(yaml@2.9.0))
       '@vitest/pretty-format': 3.2.7
       '@vitest/runner': 3.2.7
       '@vitest/snapshot': 3.2.7

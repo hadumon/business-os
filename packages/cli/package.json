@@ -28,6 +28,7 @@
     "@business-os/agent-strategy": "workspace:*",
     "@business-os/agent-product": "workspace:*",
     "@dasna/agent-sales": "workspace:*",
+    "@dasna/agent-catalog": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {

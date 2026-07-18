@@ -4,12 +4,14 @@ import { discoverAgent } from "@business-os/agent-discover";
 import { strategyAgent } from "@business-os/agent-strategy";
 import { productAgent } from "@business-os/agent-product";
 import { salesAgent } from "@dasna/agent-sales";
+import { catalogAgent } from "@dasna/agent-catalog";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
   strategy: strategyAgent,
   product: productAgent,
   sales: salesAgent,
+  catalog: catalogAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -26,6 +28,7 @@ export function registerRunCommand(program: Command): void {
     .option("--budget <amount>", "customer budget (sales agent)", parseFloat)
     .option("--size <size>", "preferred size, e.g. queen, king (sales agent)")
     .option("--customer <name>", "customer name (sales agent)")
+    .option("--sku <productId>", "specific product id (catalog agent; omit to process entire catalog)")
     .action(async (
       agentId: string,
       opts: {
@@ -36,6 +39,7 @@ export function registerRunCommand(program: Command): void {
         budget?: number;
         size?: string;
         customer?: string;
+        sku?: string;
       },
     ) => {
       if (!workspaceExists()) {
@@ -95,6 +99,11 @@ export function registerRunCommand(program: Command): void {
           budget: opts.budget,
           ...(opts.size ? { size: opts.size } : {}),
           ...(opts.customer ? { customerName: opts.customer } : {}),
+        };
+      } else if (agentId === "catalog") {
+        input = {
+          project: opts.project,
+          ...(opts.sku ? { productId: opts.sku } : {}),
         };
       } else {
         if (!opts.topic) {
