@@ -1,4 +1,4 @@
-import type { Product } from "@dasna/catalog";
+import type { Product } from "./types.js";
 
 export interface CustomerNeed {
     need: string; // free-text, e.g. "back pain", "guest room", "hot sleeper"
@@ -21,7 +21,7 @@ export function matchProducts(catalog: Product[], need: CustomerNeed): ProductMa
             let score = 0;
             const reasons: string[] = [];
 
-            const goodForMatch = product.goodFor.some((tag) => needKeywords.includes(tag.replace("-", " ")));
+            const goodForMatch = product.goodFor.some((tag: string) => needKeywords.includes(tag.replace("-", " ")));
             if (goodForMatch) {
                 score += 0.4;
                 reasons.push(`matches stated need: ${need.need}`);

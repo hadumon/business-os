@@ -1,0 +1,18 @@
+{
+    "warranty": {
+        "summary": "All mattresses come with a manufacturer warranty covering structural defects (sagging beyond acceptable limits, foam degradation, spring failure). Warranty years vary by product - see individual product listings.",
+        "exclusions": "Warranty does not cover stains, physical damage, or normal wear from improper use (e.g. missing a proper bed frame/base)."
+    },
+    "delivery": {
+        "summary": "We deliver within Kathmandu Valley within 2-3 business days. Outside the valley, delivery takes 5-7 business days depending on location.",
+        "cost": "Delivery is free within Kathmandu Valley for orders above Rs. 20,000. Outside the valley, delivery charges apply based on distance."
+    },
+    "returns": {
+        "summary": "We offer a 7-day trial period from delivery date. If you're not satisfied, contact us within 7 days for a return or exchange.",
+        "conditions": "Mattress must be in original condition with protector on. Return shipping costs may apply."
+    },
+    "payment": {
+        "summary": "We accept cash on delivery, bank transfer, and major mobile payment options (eSewa, Khalti).",
+        "installments": "Installment plans are available for orders above Rs. 25,000 - ask in store or via message."
+    }
+}

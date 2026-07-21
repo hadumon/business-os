@@ -6,6 +6,7 @@ import { productAgent } from "@business-os/agent-product";
 import { salesAgent } from "@dasna/agent-sales";
 import { catalogAgent } from "@dasna/agent-catalog";
 import { marketingAgent } from "@dasna/agent-marketing";
+import { supportAgent } from "@dasna/agent-support";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
@@ -14,6 +15,7 @@ const AVAILABLE_AGENTS = {
   sales: salesAgent,
   catalog: catalogAgent,
   marketing: marketingAgent,
+  support: supportAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -32,6 +34,7 @@ export function registerRunCommand(program: Command): void {
     .option("--customer <name>", "customer name (sales agent)")
     .option("--sku <productId>", "specific product id (catalog agent; omit to process entire catalog)")
     .option("--campaign <name>", "campaign preset, e.g. dashain, tihar, new-year (marketing agent)")
+    .option("--question <text>", "customer question (support agent)")
     .action(async (
       agentId: string,
       opts: {
@@ -44,6 +47,7 @@ export function registerRunCommand(program: Command): void {
         customer?: string;
         sku?: string;
         campaign?: string;
+        question?: string;
       },
     ) => {
       if (!workspaceExists()) {
@@ -116,6 +120,13 @@ export function registerRunCommand(program: Command): void {
           return;
         }
         input = { project: opts.project, campaign: opts.campaign };
+      } else if (agentId === "support") {
+        if (!opts.question) {
+          console.error("`bos run support` requires --question <text>");
+          process.exitCode = 1;
+          return;
+        }
+        input = { project: opts.project, question: opts.question };
       } else {
         if (!opts.topic) {
           console.error(`\`bos run ${agentId}\` requires --topic <topic>`);

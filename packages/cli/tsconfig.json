@@ -17,7 +17,8 @@
     { "path": "../../agents/product" },
     { "path": "../../packs/dasna/sales" },
     { "path": "../../packs/dasna/catalog-agent" },
-    { "path": "../../packs/dasna/marketing" }
+    { "path": "../../packs/dasna/marketing" },
+    { "path": "../../packs/dasna/support" }
   ],
   "typeAcquisition": {
     "exclude": ["@types/node"]

@@ -1,4 +1,4 @@
-import type { ProductMatch, CustomerNeed } from "./matching.js";
+import type { ProductMatch, CustomerNeed } from "@dasna/catalog";
 import type { Product } from "@dasna/catalog";
 
 const MIN_DISPLAY_SCORE = 0.5; // don't show weak/off-target matches to the customer

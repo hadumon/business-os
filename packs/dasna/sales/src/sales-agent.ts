@@ -1,6 +1,6 @@
 import { defineAgent, z } from "@business-os/sdk";
 import { loadCatalog } from "@dasna/catalog";
-import { matchProducts, suggestUpsells } from "./matching.js";
+import { matchProducts, suggestUpsells } from "@dasna/catalog";
 import { renderQuote } from "./render-quote.js";
 
 export const salesInputSchema = z.object({

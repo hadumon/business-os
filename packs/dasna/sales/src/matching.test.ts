@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { matchProducts, suggestUpsells } from "./matching.js";
+import { matchProducts, suggestUpsells } from "@dasna/catalog";
 import type { Product } from "@dasna/catalog";
 
 const catalog: Product[] = [
