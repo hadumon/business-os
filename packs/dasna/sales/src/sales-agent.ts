@@ -35,7 +35,8 @@ export const salesAgent = defineAgent({
             ...(ctx.input.size !== undefined ? { size: ctx.input.size } : {}),
         });
 
-        const displayMatches = matches.filter((m) => m.score >= MIN_DISPLAY_SCORE);
+        const strongMatches = matches.filter((m) => m.score >= MIN_DISPLAY_SCORE);
+        const displayMatches = strongMatches.length > 0 ? strongMatches : matches.slice(0, 2); // fallback: show closest options even if weak
 
         const upsells = displayMatches[0] ? suggestUpsells(catalog, displayMatches[0].product) : [];
 

@@ -47,7 +47,21 @@ export function matchProducts(catalog: Product[], need: CustomerNeed): ProductMa
         .filter((m) => m.score > 0)
         .sort((a, b) => b.score - a.score);
 
-    return matches;
+    // If any product matched a tag or size (score > 0.3), return the regular matches.
+    if (matches.some(m => m.score > 0.3)) return matches;
+
+    // Fallback: no tag/size match found. Rather than return nothing, surface
+    // the best in-budget options so the customer still gets a useful answer.
+    const budgetOnly = catalog
+        .filter((p) => p.type !== "accessory" && p.price <= need.budget)
+        .map((product) => ({
+            product,
+            score: 0.2,
+            reasons: [`within budget (Rs. ${product.price})`, "general recommendation - no exact match found for your specific need"],
+        }))
+        .sort((a, b) => a.product.price - b.product.price);
+
+    return budgetOnly;
 }
 
 export function suggestUpsells(catalog: Product[], primaryProduct: Product): Product[] {

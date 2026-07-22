@@ -31,6 +31,7 @@
     "@dasna/agent-catalog": "workspace:*",
     "@dasna/agent-marketing": "workspace:*",
     "@dasna/agent-support": "workspace:*",
+    "@dasna/catalog": "workspace:*",
     "commander": "^12.1.0"
   },
   "devDependencies": {
