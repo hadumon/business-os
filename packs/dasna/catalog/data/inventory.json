@@ -1,0 +1,32 @@
+{
+    "mat-memory-queen": {
+        "stock": 12,
+        "weeklyAvgSales": 3,
+        "leadTimeDays": 14
+    },
+    "mat-orthopedic-queen": {
+        "stock": 4,
+        "weeklyAvgSales": 2,
+        "leadTimeDays": 14
+    },
+    "mat-spring-single": {
+        "stock": 20,
+        "weeklyAvgSales": 1,
+        "leadTimeDays": 10
+    },
+    "mat-hybrid-king": {
+        "stock": 2,
+        "weeklyAvgSales": 1,
+        "leadTimeDays": 21
+    },
+    "acc-pillow-memory": {
+        "stock": 35,
+        "weeklyAvgSales": 5,
+        "leadTimeDays": 7
+    },
+    "acc-mattress-protector-queen": {
+        "stock": 6,
+        "weeklyAvgSales": 4,
+        "leadTimeDays": 7
+    }
+}

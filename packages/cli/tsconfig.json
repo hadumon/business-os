@@ -19,6 +19,7 @@
     { "path": "../../packs/dasna/catalog-agent" },
     { "path": "../../packs/dasna/marketing" },
     { "path": "../../packs/dasna/support" },
+    { "path": "../../packs/dasna/inventory" },
     { "path": "../../packs/dasna/catalog" }
   ],
   "typeAcquisition": {

@@ -27,7 +27,7 @@ export function registerHealthCommand(program: Command): void {
                 });
             } catch (err) {
                 checks.push({ label: "Catalog loaded", ok: false, detail: String(err) });
-                checks.push({ label: "Products validated", ok: false, detail: "skipped — catalog failed to load" });
+                checks.push({ label: "Products validated", ok: false, detail: "skipped - catalog failed to load" });
             }
 
             try {
@@ -64,6 +64,14 @@ export function registerHealthCommand(program: Command): void {
                 checks.push({ label: "Support knowledge loaded", ok: true });
             } catch (err) {
                 checks.push({ label: "Support knowledge loaded", ok: false, detail: String(err) });
+            }
+
+            try {
+                const { loadInventory } = await import("@dasna/catalog");
+                const inventory = await loadInventory();
+                checks.push({ label: "Inventory data loaded", ok: Object.keys(inventory).length > 0, detail: `${Object.keys(inventory).length} tracked SKUs` });
+            } catch (err) {
+                checks.push({ label: "Inventory data loaded", ok: false, detail: String(err) });
             }
 
             console.log("Dasna Business Pack\n");

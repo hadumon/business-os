@@ -6,3 +6,6 @@ export * from "./scoring.js";
 export * from "./swot.js";
 export * from "./pricing.js";
 export * from "./risk-analysis.js";
+export * from "./stock-health.js";
+export * from "./fast-moving-products.js";
+export * from "./reorder-recommendation.js";

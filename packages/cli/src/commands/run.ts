@@ -7,6 +7,7 @@ import { salesAgent } from "@dasna/agent-sales";
 import { catalogAgent } from "@dasna/agent-catalog";
 import { marketingAgent } from "@dasna/agent-marketing";
 import { supportAgent } from "@dasna/agent-support";
+import { inventoryAgent } from "@dasna/agent-inventory";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
@@ -16,6 +17,7 @@ const AVAILABLE_AGENTS = {
   catalog: catalogAgent,
   marketing: marketingAgent,
   support: supportAgent,
+  inventory: inventoryAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -127,6 +129,8 @@ export function registerRunCommand(program: Command): void {
           return;
         }
         input = { project: opts.project, question: opts.question };
+      } else if (agentId === "inventory") {
+        input = { project: opts.project };
       } else {
         if (!opts.topic) {
           console.error(`\`bos run ${agentId}\` requires --topic <topic>`);
