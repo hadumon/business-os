@@ -1,0 +1,19 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": { "outDir": "dist", "rootDir": "src", "composite": true },
+  "include": ["src"],
+  "references": [
+    { "path": "../../../packages/core" },
+    { "path": "../../../packages/workflow" },
+    { "path": "../../../packages/sdk" },
+    { "path": "../../../packages/memory" },
+    { "path": "../../../packages/artifacts" },
+    { "path": "../../../packages/runtime" },
+    { "path": "../../../agents/discover" },
+    { "path": "../../../agents/strategy" },
+    { "path": "../../../agents/product" },
+    { "path": "../catalog-agent" },
+    { "path": "../inventory" },
+    { "path": "../analytics" }
+  ]
+}

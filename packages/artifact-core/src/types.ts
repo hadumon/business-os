@@ -1,5 +1,13 @@
 export type ArtifactType =
-  | "strategy" | "prd" | "roadmap" | "sprint" | "marketing" | "investor" | "report" | "unknown";
+  | "strategy"
+  | "prd"
+  | "roadmap"
+  | "sprint"
+  | "marketing"
+  | "investor"
+  | "report"
+  | "insight"
+  | "unknown";
 
 export type ArtifactStatus = "draft" | "review" | "approved" | "archived";
 

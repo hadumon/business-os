@@ -8,6 +8,7 @@ import { catalogAgent } from "@dasna/agent-catalog";
 import { marketingAgent } from "@dasna/agent-marketing";
 import { supportAgent } from "@dasna/agent-support";
 import { inventoryAgent } from "@dasna/agent-inventory";
+import { analyticsAgent } from "@dasna/agent-analytics";
 
 const AVAILABLE_AGENTS = {
   discover: discoverAgent,
@@ -18,6 +19,7 @@ const AVAILABLE_AGENTS = {
   marketing: marketingAgent,
   support: supportAgent,
   inventory: inventoryAgent,
+  analytics: analyticsAgent,
 } as const;
 
 export function registerRunCommand(program: Command): void {
@@ -129,7 +131,7 @@ export function registerRunCommand(program: Command): void {
           return;
         }
         input = { project: opts.project, question: opts.question };
-      } else if (agentId === "inventory") {
+      } else if (agentId === "inventory" || agentId === "analytics") {
         input = { project: opts.project };
       } else {
         if (!opts.topic) {

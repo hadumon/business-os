@@ -6,6 +6,7 @@ export type ArtifactType =
   | "marketing"
   | "investor"
   | "report"
+  | "insight"
   | "unknown";
 
 export type ArtifactStatus = "draft" | "review" | "approved" | "archived";

@@ -20,6 +20,8 @@
     { "path": "../../packs/dasna/marketing" },
     { "path": "../../packs/dasna/support" },
     { "path": "../../packs/dasna/inventory" },
+    { "path": "../../packs/dasna/analytics" },
+    { "path": "../../packs/dasna/pipelines" },
     { "path": "../../packs/dasna/catalog" }
   ],
   "typeAcquisition": {

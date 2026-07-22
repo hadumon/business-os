@@ -12,6 +12,7 @@ import { registerWorkflowCommand } from "./commands/workflow.js";
 import { registerArtifactsCommand } from "./commands/artifacts.js";
 import { registerMemoryCommand } from "./commands/memory.js";
 import { registerHealthCommand } from "./commands/health.js";
+import { registerPipelineCommand } from "./commands/pipeline.js";
 const program = new Command();
 
 program.name("bos").description("BusinessOS CLI").version("0.1.0");
@@ -20,6 +21,7 @@ registerInitCommand(program);
 registerDoctorCommand(program);
 registerRunCommand(program);
 registerWorkflowCommand(program);
+registerPipelineCommand(program);
 registerArtifactsCommand(program);
 registerMemoryCommand(program);
 registerHealthCommand(program);

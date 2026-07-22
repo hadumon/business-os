@@ -33,6 +33,40 @@ const WORKFLOW_SHAPES: Record<string, string[]> = {
     "render-quote",
     "create-artifact",
   ],
+  catalog: [
+    "load-catalog",
+    "validate-schema",
+    "format-product-entries",
+    "create-artifact",
+  ],
+  marketing: [
+    "load-campaign-templates",
+    "customize-for-topic",
+    "render-copy",
+    "create-artifact",
+  ],
+  support: [
+    "load-knowledge-base",
+    "classify-topic",
+    "generate-response",
+    "create-artifact",
+  ],
+  inventory: [
+    "load-catalog-and-inventory",
+    "compute-stock-health",
+    "flag-reorder-candidates",
+    "render-report",
+    "create-artifact",
+  ],
+  analytics: [
+    "evaluate-sales-performance",
+    "evaluate-stock-health",
+    "analyze-marketing-coverage",
+    "analyze-support-volume",
+    "synthesize-cross-recommendations",
+    "render-report",
+    "create-artifact",
+  ],
 };
 
 export function registerWorkflowCommand(program: Command): void {

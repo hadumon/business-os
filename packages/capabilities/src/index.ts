@@ -9,3 +9,7 @@ export * from "./risk-analysis.js";
 export * from "./stock-health.js";
 export * from "./fast-moving-products.js";
 export * from "./reorder-recommendation.js";
+export * from "./sales-performance.js";
+export * from "./marketing-coverage.js";
+export * from "./support-volume.js";
+export * from "./cross-recommendations.js";

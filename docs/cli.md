@@ -63,6 +63,16 @@ Lists memory documents (not artifacts) in the workspace, optionally filtered by 
 ### `bos workflow <agent>`
 Prints the effective execution pipeline for an agent, for human inspection — not a live introspection of a running `Workflow` instance, just a static description of stages in order. Useful for understanding what an agent does before running it.
 
+### `bos pipeline`
+Manages and executes multi-agent pipeline presets:
+```bash
+bos pipeline list                       # List available pipeline presets
+bos pipeline show operations             # Show execution steps for a preset
+bos pipeline run operations -p dasna     # Run a pipeline
+bos pipeline run operations -p dasna --dry-run # Preview execution steps
+```
+See [`pipelines.md`](./pipelines.md) for details.
+
 ## Known agent registry
 
 As of v0.4.0-alpha, `bos run` recognizes: `discover`, `strategy`, `product`. Registering a new agent with the CLI means adding it to `AVAILABLE_AGENTS` in `packages/cli/src/commands/run.ts` and to the stage list in `commands/workflow.ts` — this is manual today; there's no dynamic agent-discovery mechanism yet.

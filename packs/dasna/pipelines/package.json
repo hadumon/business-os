@@ -1,11 +1,8 @@
 {
-  "name": "@business-os/cli",
+  "name": "@dasna/pipelines",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "bin": {
-    "bos": "./dist/index.js"
-  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -16,30 +13,20 @@
   },
   "dependencies": {
     "@business-os/core": "workspace:*",
+    "@business-os/workflow": "workspace:*"
+  },
+  "devDependencies": {
     "@business-os/sdk": "workspace:*",
-    "@business-os/router": "workspace:*",
-    "@business-os/workflow": "workspace:*",
     "@business-os/memory": "workspace:*",
     "@business-os/artifacts": "workspace:*",
-    "@business-os/artifact-core": "workspace:*",
-    "@business-os/artifact-graph": "workspace:*",
     "@business-os/runtime": "workspace:*",
     "@business-os/agent-discover": "workspace:*",
     "@business-os/agent-strategy": "workspace:*",
     "@business-os/agent-product": "workspace:*",
-    "@dasna/agent-sales": "workspace:*",
     "@dasna/agent-catalog": "workspace:*",
-    "@dasna/agent-marketing": "workspace:*",
-    "@dasna/agent-support": "workspace:*",
     "@dasna/agent-inventory": "workspace:*",
     "@dasna/agent-analytics": "workspace:*",
-    "@dasna/pipelines": "workspace:*",
-    "@dasna/catalog": "workspace:*",
-    "commander": "^12.1.0"
-  },
-  "devDependencies": {
     "typescript": "^5.9.0",
-    "vitest": "^3.2.0",
-    "@types/node": "^22.10.0"
+    "vitest": "^3.2.0"
   }
 }
